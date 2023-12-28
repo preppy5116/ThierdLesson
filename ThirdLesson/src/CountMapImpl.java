@@ -10,14 +10,19 @@ public class CountMapImpl<T> implements CountMap<T>{
 
     @Override
     public int getCount(T key) {
-        return map.get(key);
+        return map.get(key) == null ? 0 : map.get(key);
     }
 
     @Override
     public int remove(T key) {
         int count = this.getCount(key);
-        map.remove(key);
-        return count;
+        if(count != 0)
+        {
+            map.remove(key);
+            return count;
+        }
+        return 0;
+
     }
 
     @Override
@@ -40,7 +45,7 @@ public class CountMapImpl<T> implements CountMap<T>{
 
     @Override
     public Map<T, Integer> toMap() {
-        return new HashMap<>(map);
+        return map;
     }
 
     @Override

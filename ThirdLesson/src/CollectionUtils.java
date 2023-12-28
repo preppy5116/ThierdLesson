@@ -1,18 +1,21 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("ALL")
 public class CollectionUtils<T extends Comparable<T>>  {
-
-     private T min = null;
-     private T max = null ;
-     private T value = null ;
     public static<T> void addAll(List<? extends T> source, List<? super T> destination) {
         destination.addAll(source);
     }
 
     public static<T> List<T> newArrayList() {
         return new ArrayList<T>();
+    }
 
+    public static<T> int indexOf(List<T> source, T value) {
+        return source.indexOf(value);
+    }
+    public static<T> List<T> limit(List<T> source, int size) {
+        return source.stream().limit(size).collect(Collectors.toList());
     }
     public static<T> void add(List<? super T> source, T value) {
         source.add(value);
@@ -23,7 +26,7 @@ public class CollectionUtils<T extends Comparable<T>>  {
     }
 
     public static<T> boolean containsAll(List<? extends T> c1, List<? extends T> c2) {
-        return c1.containsAll(c2);
+        return new HashSet<>(c1).containsAll(c2);
     }
 
     public static<T> boolean containsAny(List<? extends T> c1, List<? extends T> c2) {
